@@ -1,0 +1,27 @@
+Config {
+    font = "xft:Cantarell:style=bold:size=12:antialias=true",
+    bgColor = "#2b2b2b",
+    fgColor = "#8fb28f",
+    border = BottomB,
+    borderColor = "#c3bf9f",
+    position = TopSize L 100 35,
+    lowerOnStart = True,
+    commands = [
+        Run MultiCpu ["-L","5", "-H","50", "--normal","#6c6c9c", "--high","red"] 10,
+        Run Memory ["-t","Mem: <usedratio>%"] 10,
+        Run Battery [
+            "-t", "<acstatus>",
+            "-L", "20", "-H", "75",
+            "--low", "#red", "--high", "#6c6c9c",
+            "--",
+            "-f", "ADP1/online",
+            "-O", "AC", "-i", "AC",
+            "-o", "<left>% / <timeleft>"
+        ] 600,
+        Run Date "%a %b %_d %l:%M" "date" 10,
+        Run StdinReader
+    ],
+    sepChar = "%",
+    alignSep = "}{",
+    template = " %StdinReader% }{ %multicpu%  %memory%     %battery%     %date% "
+}
