@@ -20,7 +20,7 @@ main = do
         borderWidth = 3,
         normalBorderColor = "#2b2b2b",
         focusedBorderColor = "#6C6C9C",
-        --modMask = mod4Mask  --Rebind Mod to the windows key
+        modMask = mod4Mask,  --Rebind Mod to the windows key
 
         manageHook = manageDocks <+> manageHook defaultConfig,
         layoutHook = avoidStruts  $  layoutHook defaultConfig,
