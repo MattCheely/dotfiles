@@ -3,3 +3,5 @@
 	name = Matthew Cheely
 [push]
 	default = simple
+[core]
+	editor = vim

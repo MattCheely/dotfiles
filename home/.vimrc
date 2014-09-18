@@ -6,22 +6,27 @@ call vundle#rc()
 
 " let Vungle manage Vundle
 " required!
-Bundle 'gmarik/vundle'
+Plugin 'gmarik/vundle'
 
 " github repos
-Bundle 'Valloric/YouCompleteMe'
-Bundle 'pangloss/vim-javascript'
-Bundle 'goldfeld/vim-seek'
-Bundle 'scrooloose/syntastic'
-Bundle 'scrooloose/nerdtree'
-Bundle 'kien/ctrlp.vim'
-Bundle 'jnurmine/Zenburn'
-Bundle 'Lokaltog/powerline'
-Bundle 'airblade/vim-gitgutter'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'pangloss/vim-javascript'
+Plugin 'goldfeld/vim-seek'
+Plugin 'scrooloose/syntastic'
+Plugin 'scrooloose/nerdtree'
+Plugin 'kien/ctrlp.vim'
+Plugin 'jnurmine/Zenburn'
+Plugin 'Lokaltog/powerline'
+" Plugin 'airblade/vim-gitgutter'
+" Plugin 'mikewest/vimroom'
+" Plugin 'junegunn/goyo.vim'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'wting/rust.vim'
+Plugin 'mattn/emmet-vim'
 
 "vim-scripts
-Bundle 'darkburn'
-Bundle 'Rename2'
+Plugin 'darkburn'
+Plugin 'Rename2'
 
 
 " ========= Config ==============================
@@ -152,7 +157,8 @@ colorscheme darkburn
 
 " Set extra options when running in GUI mode
 if has("gui_running")
-    set guifont=Inconsolata\ for\ Powerline\ Medium\ 13
+    "set guifont=Inconsolata\ for\ Powerline\ Medium\ 13
+    set guifont=Fantasque\ Sans\ Mono\ 14
     set guioptions-=T
     set guioptions-=m
     set guioptions+=e
