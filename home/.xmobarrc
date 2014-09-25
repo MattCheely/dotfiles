@@ -19,9 +19,10 @@ Config {
             "-o", "<left>% / <timeleft>"
         ] 600,
         Run Date "%a %b %_d %l:%M" "date" 10,
-        Run StdinReader
+        Run StdinReader,
+        Run CommandReader "~/.my-utils/volume-notify.sh" "vol"
     ],
     sepChar = "%",
     alignSep = "}{",
-    template = " %StdinReader% }{ %multicpu%  %memory%     %battery%     %date% "
+    template = " %StdinReader% }{ %multicpu%  %memory%     %battery%     %vol%    %date% "
 }
