@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<gconf>
+	<entry name="palette" mtime="1385004550" type="string">
+		<stringvalue>#000B13:#E89393:#9ECE9E:#F0DFAF:#8CD0D3:#C0BED1:#DFAF8F:#EFEFEF:#000B13:#E89393:#9ECE9E:#F0DFAF:#8CD0D3:#C0BED1:#DFAF8F:#FFFFFF</stringvalue>
+	</entry>
+	<entry name="bold_color" mtime="1385004550" type="string">
+		<stringvalue>#FFCFAF</stringvalue>
+	</entry>
+	<entry name="background_color" mtime="1385004550" type="string">
+		<stringvalue>#1F1F1F</stringvalue>
+	</entry>
+	<entry name="foreground_color" mtime="1385004549" type="string">
+		<stringvalue>#DCDCCC</stringvalue>
+	</entry>
+</gconf>
