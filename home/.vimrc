@@ -10,18 +10,17 @@ Plugin 'gmarik/vundle'
 
 " github repos
 Plugin 'Valloric/YouCompleteMe'
-Plugin 'pangloss/vim-javascript'
+"Plugin 'pangloss/vim-javascript'
 Plugin 'goldfeld/vim-seek'
 Plugin 'scrooloose/syntastic'
 Plugin 'scrooloose/nerdtree'
 Plugin 'kien/ctrlp.vim'
 Plugin 'jnurmine/Zenburn'
 Plugin 'Lokaltog/powerline'
-" Plugin 'airblade/vim-gitgutter'
+Plugin 'airblade/vim-gitgutter'
 " Plugin 'mikewest/vimroom'
 " Plugin 'junegunn/goyo.vim'
 Plugin 'altercation/vim-colors-solarized'
-Plugin 'wting/rust.vim'
 Plugin 'mattn/emmet-vim'
 
 "vim-scripts
@@ -57,13 +56,15 @@ nmap <leader>q :q<cr>
 "Unmap <leader>d from YouCompleteMe so we can use it for other things
 let g:ycm_key_detailed_diagnostics = ''
 
-"Run syntax checks on file open
+" Run syntax checks on file open
 let g:syntastic_check_on_open=1
-"Set syntax check symbols
+" Set syntax check symbols
 let g:syntastic_error_symbol='✗'
 let g:syntastic_warning_symbol='⚠'
-"Turn off error highlighting, symbols are plenty
+" Turn off error highlighting, symbols are plenty
 let g:syntastic_enable_highlighting = 0
+" Set languange checkers
+let g:syntastic_javascript_checkers = ['jshint', 'jscs']
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
