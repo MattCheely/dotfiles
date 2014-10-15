@@ -158,8 +158,8 @@ colorscheme darkburn
 
 " Set extra options when running in GUI mode
 if has("gui_running")
-    "set guifont=Inconsolata\ for\ Powerline\ Medium\ 13
-    set guifont=Fantasque\ Sans\ Mono\ 14
+    set guifont=Inconsolata\ for\ Powerline\ Medium\ 13
+    "set guifont=Fantasque\ Sans\ Mono\ 14
     set guioptions-=T
     set guioptions-=m
     set guioptions+=e
@@ -314,10 +314,10 @@ autocmd BufWrite *.coffee :call DeleteTrailingWS()
 vnoremap <silent> gv :call VisualSelection('gv')<CR>
 
 " Open vimgrep and put the cursor in the right position
-map <leader>g :vimgrep // **/*.<left><left><left><left><left><left><left>
+map <leader>g :noautocmd vimgrep //j **/*.*<left><left><left><left><left><left><left><left><left>
 
 " Vimgreps in the current file
-map <leader><space> :vimgrep // <C-R>%<C-A><right><right><right><right><right><right><right><right><right>
+map <leader><space> :noautocmd vimgrep // <C-R>%<C-A><right><right><right><right><right><right><right><right><right>
 
 " When you press <leader>r you can search and replace the selected text
 vnoremap <silent> <leader>r :call VisualSelection('replace')<CR>
