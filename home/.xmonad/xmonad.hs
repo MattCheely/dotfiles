@@ -1,20 +1,17 @@
 import XMonad
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
+import XMonad.Util.EZConfig
 import XMonad.Util.Run(spawnPipe)
-import XMonad.Util.EZConfig(additionalKeys)
 import System.IO
 
-{-
-myKeys = \c -> mkKeymap c $ [
-        ("<XF86AudioRaiseVolume>", spawn "aumix2pipe +10"),
-        ("<XF86AudioLowerVolume>", spawn "aumix2pipe +10"),
-        ("<XF86AudioMute>", spawn "aumix2pipe +10")
-]
--}
+myKeys = [ ("<XF86AudioRaiseVolume>", spawn "amixer set Master 2+")
+         , ("<XF86AudioLowerVolume>", spawn "amixer set Master 2-")
+         , ("<XF86AudioMute>",        spawn "amixer set Master toggle")
+         ]
 
 main = do
-    xmproc <- spawnPipe "/usr/bin/xmobar /home/matt/.xmobarrc"
+    xmproc <- spawnPipe "/usr/bin/xmobar ~/.xmobarrc"
     xmonad $ defaultConfig {
         terminal = "gnome-terminal",
         borderWidth = 3,
