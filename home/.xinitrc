@@ -15,9 +15,9 @@ if [ -s ~/.Xmodmap ]; then
     xmodmap ~/.Xmodmap
 fi
 
-#xsetroot -solid "#2b2b2b" -cursor_name left_ptr
+xsetroot -solid "#2b2b2b" -cursor_name left_ptr
 feh --randomize --bg-fill /usr/share/backgrounds/* &
-xscreensaver &
+xscreensaver --no-splash&
 
 exec xmonad
 # exec gnome-session

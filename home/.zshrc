@@ -10,6 +10,12 @@ ZSH_THEME="robbyrussell"
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+alias hoogle='web_search duckduckgo \!hoogle'
+alias mdn='web_search duckduckgo \!mdn'
+
+function ddb() {
+    web_search duckduckgo \!$*
+}
 
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
@@ -45,7 +51,7 @@ ZSH_THEME="robbyrussell"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git archlinux dircycle npm)
+plugins=(git archlinux dircycle npm web-search)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -68,3 +74,4 @@ export PATH=$HOME/bin:/usr/local/bin:$PATH
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 
 source "$HOME/.homesick/repos/homeshick/homeshick.sh"
+homeshick --quiet refresh
