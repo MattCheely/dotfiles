@@ -12,6 +12,7 @@ ZSH_THEME="robbyrussell"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias hoogle='web_search duckduckgo \!hoogle'
 alias mdn='web_search duckduckgo \!mdn'
+alias groot='cd $(git rev-parse --show-toplevel)'
 
 function ddb() {
     web_search duckduckgo \!$*
