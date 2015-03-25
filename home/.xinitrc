@@ -17,7 +17,7 @@ fi
 
 xsetroot -solid "#2b2b2b" -cursor_name left_ptr
 feh --randomize --bg-fill /usr/share/backgrounds/* &
-xscreensaver --no-splash&
+xscreensaver -no-splash&
 
 exec xmonad
 # exec gnome-session
