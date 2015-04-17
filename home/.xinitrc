@@ -11,10 +11,7 @@ if [ -d /etc/X11/xinit/xinitrc.d ]; then
   unset f
 fi
 
-if [ -s ~/.Xmodmap ]; then
-    xmodmap ~/.Xmodmap
-fi
-
+setxkbmap -model pc104 -option ctrl:nocaps
 xsetroot -solid "#2b2b2b" -cursor_name left_ptr
 feh --randomize --bg-fill /usr/share/backgrounds/* &
 xscreensaver -no-splash&
