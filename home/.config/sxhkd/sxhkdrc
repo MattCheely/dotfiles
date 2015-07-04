@@ -95,6 +95,18 @@ XF86AudioRaiseVolume
 XF86AudioMute
     ~/.lemonbar/volume_ctrl toggle
 
+XF86MonBrightnessUp
+    xbacklight -inc 10
+
+XF86MonBrightnessDown
+    xbacklight -dec 10
+
+shift + XF86MonBrightnessUp
+    xbacklight -inc 1
+
+shift + XF86MonBrightnessDown
+    xbacklight -dec 1
+
 # make sxhkd reload its configuration files:
 super + Escape
 	pkill -USR1 -x sxhkd
