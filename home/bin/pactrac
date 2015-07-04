@@ -1,0 +1,15 @@
+#!/bin/sh
+
+PKG_FILE=$HOME/.setup/arch_packages
+NEW_PKGS=$@
+
+sudo pacman -S $NEW_PKGS
+
+if [ $? -eq 0 ]
+then
+    echo "Install Successful. Updating package list..."
+    echo $NEW_PKGS | sed "s/ /\n/g" | cat $PKG_FILE - | sort -u -o $PKG_FILE
+    cat $PKG_FILE
+else
+    echo "Install failed. Not updating package list."
+fi

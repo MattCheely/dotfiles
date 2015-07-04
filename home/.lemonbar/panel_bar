@@ -1,0 +1,97 @@
+#! /bin/sh
+#
+# Example panel for LemonBoy's bar
+
+DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+. $DIR/panel_colors
+
+num_mon=$(bspc query -M | wc -l)
+
+format() {
+    local text=$1
+    local fg=${2:-$COLOR_FG}
+    local bg=${3:-$COLOR_BG}
+    echo "%{F$fg}%{B$bg}${text}%{B-}%{F-}"
+}
+
+format_ul() {
+    local text=$1
+    local fg=${2:-$COLOR_FG}
+    local bg=${3:-$COLOR_BG}
+    echo "%{F$fg}%{B$bg}%{+u}${text}%{-u}%{B-}%{F-}"
+}
+
+while read -r line ; do
+    case $line in
+        B*)
+            #battery output
+            battery_info=$(format "${line#?}")
+            ;;
+        C*)
+            # clock output
+            clock=$(format "${line#?}")
+            ;;
+        T*)
+            # xtitle output
+            title=$(format "${line#?}")
+            ;;
+        V*)
+            # volume output
+            volume=$(format "${line#?}")
+            ;;
+        W*)
+            # bspwm internal state
+            wm_infos=""
+            IFS=':'
+            set -- ${line#?}
+            while [ $# -gt 0 ] ; do
+                item=$1
+                name=${item#?}
+                case $item in
+                    M*)
+                        # active monitor
+                        if [ $num_mon -gt 1 ] ; then
+                            wm_infos="$wm_infos $(format $name $COLOR_FG_ACTIVE $COLOR_BG_ACTIVE)  "
+                        fi
+                        ;;
+                    m*)
+                        # inactive monitor
+                        if [ $num_mon -gt 1 ] ; then
+                            wm_infos="$wm_infos $(format $name)  "
+                        fi
+                        ;;
+                    O*)
+                        # focused occupied desktop
+                        wm_infos=${wm_infos}$(format_ul " $name " $COLOR_FG_ACTIVE $COLOR_BG_ACTIVE)
+                        ;;
+                    F*)
+                        # focused free desktop
+                        wm_infos=${wm_infos}$(format_ul " $name " $COLOR_FG_ACTIVE $COLOR_BG_ACTIVE)
+                        ;;
+                    U*)
+                        # focused urgent desktop
+                        wm_infos=${wm_infos}$(format_ul " $name " $COLOR_FG_ACTIVE $COLOR_BG_ACTIVE)
+                        ;;
+                    o*)
+                        # occupied desktop
+                        wm_infos=${wm_infos}$(format " $name ")
+                        ;;
+                    f*)
+                        # free desktop
+                        wm_infos=${wm_infos}$(format " $name ")
+                        ;;
+                    u*)
+                        # urgent desktop
+                        wm_infos=${wm_infos}$(format " $name ")
+                        ;;
+                    L*)
+                        # layout
+                        wm_infos=${wm_infos}$(format " $name ")
+                        ;;
+                esac
+                shift
+            done
+            ;;
+    esac
+    printf "%s\n" "%{l}${wm_infos}%{c}${title}%{r}${volume}  ${battery_info}   ${clock} "
+done

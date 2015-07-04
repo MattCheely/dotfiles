@@ -13,10 +13,13 @@ fi
 
 setxkbmap -model pc104 -option ctrl:nocaps
 xsetroot -solid "#2b2b2b" -cursor_name left_ptr
-feh --randomize --bg-fill /usr/share/backgrounds/* &
+#TODO: Generate list of files instead of using folders & remove .desktop entries
+feh --randomize --recursive --bg-fill /usr/share/wallpapers /usr/share/archlinux/wallpaper &
 xscreensaver -no-splash&
 
-exec xmonad
+sxhkd &
+exec bspwm
+
 # exec gnome-session
 # exec startkde
 # exec startxfce4

@@ -1,0 +1,37 @@
+#! /bin/sh
+
+#Find the current directory & source utilities and config
+DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+. $DIR/profile
+. $DIR/panel_colors
+. $DIR/battery
+. $DIR/clock
+
+if [ $(pgrep -cx panel) -gt 1 ] ; then
+	printf "%s\n" "The panel is already running." >&2
+	exit 1
+fi
+
+trap 'trap - TERM; kill 0' INT TERM QUIT EXIT
+
+# Make room for the panel
+bspc config top_padding $PANEL_HEIGHT
+
+# Set up a fifo we can write data to
+[ -e "$PANEL_FIFO" ] && rm "$PANEL_FIFO"
+mkfifo "$PANEL_FIFO"
+
+# Throw the FIFO buffer at the panel
+cat "$PANEL_FIFO" | $DIR/panel_bar | lemonbar -g x$PANEL_HEIGHT -f "$PANEL_FONT_FAMILY" -F "$COLOR_FG" -B "$COLOR_BG" &
+
+#Write stuff to the panel FIFO
+
+bspc control --subscribe > "$PANEL_FIFO" &
+xtitle -sf 'T%s' > "$PANEL_FIFO" &
+echo "$($DIR/volume_ctrl)" > $PANEL_FIFO &
+
+while true; do
+    echo "C$(clock)" > "$PANEL_FIFO" &
+    echo "B$(battery)" > "$PANEL_FIFO" &
+    sleep 1
+done

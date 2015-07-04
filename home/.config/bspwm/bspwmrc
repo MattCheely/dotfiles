@@ -1,4 +1,5 @@
 #! /bin/sh
+compton -b  # enable compositing
 
 bspc config border_width        2
 bspc config window_gap         12
@@ -16,3 +17,6 @@ bspc rule -a Chromium desktop=^2
 bspc rule -a mplayer2 floating=on
 bspc rule -a Kupfer.py focus=on
 bspc rule -a Screenkey manage=off
+
+~/.lemonbar/panel & # start panel
+sxhkd &

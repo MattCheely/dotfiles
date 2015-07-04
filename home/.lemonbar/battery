@@ -1,0 +1,14 @@
+#!/bin/sh
+
+#Battery output function
+battery() {
+    battery_info=$(acpi --battery)
+    is_charging=$(echo "$battery_info" | grep -c "Charging")
+    battery_per=$(echo "$battery_info" | cut -d, -f2)
+    if [ $is_charging -gt 0 ]
+    then
+        echo "$battery_per% AC"
+    else
+        echo "$battery_per%   "
+    fi
+}
