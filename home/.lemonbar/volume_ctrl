@@ -6,9 +6,13 @@ DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 
 if [ -z ${1+x} ]
 then
-    str=`amixer sget Master,0`
+    str=`amixer -M sget Master,0`
 else
-    str=`amixer set Master,0 $1`
+    str=`amixer -M set Master,0 $1`
+    if [ "$1" != "toggle" ]
+    then
+        aplay -q "$DIR/bell.wav" &
+    fi
 fi
 
 str1=${str#Simple*[}
