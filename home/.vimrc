@@ -122,7 +122,6 @@ nnoremap <leader>/ :Ag
 " Highlight column 80
 if (exists('+colorcolumn'))
     set colorcolumn=80
-    highlight ColorColumn guibg=#121212
 endif
 
 " Set 7 lines to the cursor - when moving vertically using j/k
@@ -187,6 +186,7 @@ try
 catch
 endtry
 "set background=dark
+highlight ColorColumn guibg=#121212
 
 " Set extra options when running in GUI mode
 if has("gui_running")
