@@ -4,24 +4,26 @@ filetype off
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
-" let Vungle manage Vundle
+" let Vundle manage Vundle
 " required!
 Plugin 'gmarik/vundle'
 
 " github repos
 Plugin 'Valloric/YouCompleteMe'
-"Plugin 'pangloss/vim-javascript'
 Plugin 'goldfeld/vim-seek'
 Plugin 'scrooloose/syntastic'
 Plugin 'scrooloose/nerdtree'
-Plugin 'kien/ctrlp.vim'
 Plugin 'jnurmine/Zenburn'
 Plugin 'Lokaltog/powerline'
 Plugin 'airblade/vim-gitgutter'
-" Plugin 'mikewest/vimroom'
-" Plugin 'junegunn/goyo.vim'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'mattn/emmet-vim'
+Plugin 'rking/ag.vim'
+
+" Unite plugin - depends on vimproc
+"    need to run ./make in .vim/bundle/vimproc.vim/
+Plugin 'Shougo/vimproc.vim'
+Plugin 'Shougo/unite.vim'
 
 "vim-scripts
 Plugin 'darkburn'
@@ -81,21 +83,48 @@ let NERDTreeChDirMode = 2
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => CtrlP
+" => Unite & Ag (search)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"Open files with leader-f, buffers with leader-b
-:let g:ctrlp_map = '<leader>f'
-:nmap <leader>b :CtrlPBuffer<cr>
+" unite sources
+let g:unite_source_history_yank_enable = 1
+try
+    let g:unite_source_rec_async_command='ag --nocolor --nogroup -g ""'
+    call unite#filters#matcher_default#use(['matcher_fuzzy'])
+catch
+endtry
 
-:let g:ctrlp_match_window_bottom = 0
-:let g:ctrlp_match_window_reversed = 0
-:let g:ctrlp_custom_ignore = '\v\~$|\.(o|swp|pyc|wav|mp3|ogg|blend)$|(^|[/\\])\.(hg|git|bzr)($|[/\\])|__init__\.py'
-:let g:ctrlp_working_path_mode = 0
+" search for a file in the filetree
+nnoremap <leader>f :<C-u>Unite -no-split -start-insert -auto-preview file_rec/async<cr>
+nnoremap <leader>d :<C-u>Unite -no-split -start-insert directory_rec/async -default-action=cd<cr>
+nnoremap <leader>b :<C-u>Unite -no-split -start-insert bookmark<cr>
+nnoremap <leader>y :<C-u>Unite -no-split -start-insert history/yank<cr>
+
+"Custom mappings in the unite buffer
+function! s:unite_settings()
+    " Navigate with control-j/k
+    imap <buffer> <C-j> <Plug>(unite_select_next_line)
+    imap <buffer> <C-k> <Plug>(unite_select_previous_line)
+    " exit unite
+    imap <buffer> <C-q> <Plug>(unite_exit)
+    " reset unite cache
+    imap <buffer> <C-r> <Plug>(unite_redraw)
+endfunction
+autocmd FileType unite call s:unite_settings()
+
+" --- type * to search for a word in all files
+nmap * :Ag <c-r>=expand("<cword>")<cr><cr>
+nnoremap <leader>/ :Ag
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM user interface
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Highlight column 80
+if (exists('+colorcolumn'))
+    set colorcolumn=80
+    highlight ColorColumn guibg=#121212
+endif
+
 " Set 7 lines to the cursor - when moving vertically using j/k
 set so=7
 
@@ -123,7 +152,7 @@ set whichwrap+=<,>,h,l
 set ignorecase
 
 " When searching try to be smart about cases 
-set smartcase
+"set smartcase
 
 " Highlight search results
 set hlsearch
@@ -153,7 +182,10 @@ set tm=500
 " Enable syntax highlighting
 syntax enable
 
-colorscheme darkburn
+try
+    colorscheme darkburn
+catch
+endtry
 "set background=dark
 
 " Set extra options when running in GUI mode
@@ -305,38 +337,6 @@ endfunc
 autocmd BufWrite *.py :call DeleteTrailingWS()
 autocmd BufWrite *.js :call DeleteTrailingWS()
 autocmd BufWrite *.coffee :call DeleteTrailingWS()
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => vimgrep searching and cope displaying
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" When you press gv you vimgrep after the selected text
-vnoremap <silent> gv :call VisualSelection('gv')<CR>
-
-" Open vimgrep and put the cursor in the right position
-map <leader>g :noautocmd vimgrep //j **/*.*<left><left><left><left><left><left><left><left><left>
-
-" Vimgreps in the current file
-map <leader><space> :noautocmd vimgrep // <C-R>%<C-A><right><right><right><right><right><right><right><right><right>
-
-" When you press <leader>r you can search and replace the selected text
-vnoremap <silent> <leader>r :call VisualSelection('replace')<CR>
-
-" Do :help cope if you are unsure what cope is. It's super useful!
-"
-" When you search with vimgrep, display your results in cope by doing:
-"   <leader>cc
-"
-" To go to the next search result do:
-"   <leader>n
-"
-" To go to the previous search results do:
-"   <leader>p
-"
-map <leader>cc :botright cope<cr>
-map <leader>co ggVGy:tabnew<cr>:set syntax=qf<cr>pgg
-map <leader>n :cn<cr>
-map <leader>p :cp<cr>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
