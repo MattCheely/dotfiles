@@ -87,11 +87,14 @@ let NERDTreeChDirMode = 2
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " unite sources
 let g:unite_source_history_yank_enable = 1
-try
-    let g:unite_source_rec_async_command='ag --nocolor --nogroup -g ""'
-    call unite#filters#matcher_default#use(['matcher_fuzzy'])
-catch
-endtry
+call unite#filters#matcher_default#use(['matcher_fuzzy'])
+
+if executable('ag')
+    let g:unite_source_rec_async_command = 'ag --nocolor --nogroup -g ""'
+    let g:unite_source_grep_command = 'ag'
+    let g:unite_source_grep_default_opts = '-i --line-numbers --nocolor --nogroup --hidden'
+    let g:unite_source_grep_recursive_opt = ''
+endif
 
 " search for a file in the filetree
 nnoremap <leader>f :<C-u>Unite -no-split -start-insert -auto-preview file_rec/async<cr>
@@ -106,13 +109,15 @@ function! s:unite_settings()
     imap <buffer> <C-k> <Plug>(unite_select_previous_line)
     " exit unite
     imap <buffer> <C-q> <Plug>(unite_exit)
+    nmap <buffer> <C-q> <Plug>(unite_exit)
     " reset unite cache
     imap <buffer> <C-r> <Plug>(unite_redraw)
 endfunction
 autocmd FileType unite call s:unite_settings()
 
 " --- type * to search for a word in all files
-nmap * :Ag <c-r>=expand("<cword>")<cr><cr>
+nmap* :<C-u>Unite -no-quit -auto-preview grep:<c-r>=getcwd()<cr>::<c-r>=expand("<cword>")<cr><cr>
+" nmap * :Ag <c-r>=expand("<cword>")<cr><cr>
 nnoremap <leader>/ :Ag
 
 
@@ -280,7 +285,7 @@ map <leader>cd :cd %:p:h<cr>:pwd<cr>
 
 " Specify the behavior when switching between buffers 
 try
-  set switchbuf=useopen,usetab,newtab
+  set switchbuf=useopen,usetab ",newtab
   set stal=2
 catch
 endtry
@@ -335,8 +340,8 @@ func! DeleteTrailingWS()
   exe "normal `z"
 endfunc
 autocmd BufWrite *.py :call DeleteTrailingWS()
-autocmd BufWrite *.js :call DeleteTrailingWS()
 autocmd BufWrite *.coffee :call DeleteTrailingWS()
+autocmd BufWrite *.js :call DeleteTrailingWS()
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
