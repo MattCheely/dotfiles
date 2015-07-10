@@ -14,11 +14,13 @@ Plugin 'goldfeld/vim-seek'
 Plugin 'scrooloose/syntastic'
 Plugin 'scrooloose/nerdtree'
 Plugin 'jnurmine/Zenburn'
-Plugin 'Lokaltog/powerline'
+Plugin 'bling/vim-airline'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'mattn/emmet-vim'
 Plugin 'rking/ag.vim'
+Plugin 'NLKNguyen/papercolor-theme'
+Plugin 'tpope/vim-fugitive'
 
 " Unite plugin - depends on vimproc
 "    need to run ./make in .vim/bundle/vimproc.vim/
@@ -98,6 +100,7 @@ endif
 
 " search for a file in the filetree
 nnoremap <leader>f :<C-u>Unite -no-split -start-insert -auto-preview file_rec/async<cr>
+nnoremap <leader>g :<C-u>Unite -no-quit -auto-preview grep:<c-r>=getcwd()<cr>:--case-sensitive:
 nnoremap <leader>d :<C-u>Unite -no-split -start-insert directory_rec/async -default-action=cd<cr>
 nnoremap <leader>b :<C-u>Unite -no-split -start-insert bookmark<cr>
 nnoremap <leader>y :<C-u>Unite -no-split -start-insert history/yank<cr>
@@ -116,7 +119,7 @@ endfunction
 autocmd FileType unite call s:unite_settings()
 
 " --- type * to search for a word in all files
-nmap* :<C-u>Unite -no-quit -auto-preview grep:<c-r>=getcwd()<cr>::<c-r>=expand("<cword>")<cr><cr>
+nmap* :<C-u>Unite -no-quit -auto-preview grep:<c-r>=getcwd()<cr>:--case-sensitive:<c-r>=expand("<cword>")<cr><cr>
 " nmap * :Ag <c-r>=expand("<cword>")<cr><cr>
 nnoremap <leader>/ :Ag
 
@@ -155,7 +158,7 @@ set whichwrap+=<,>,h,l
 " Ignore case when searching
 set ignorecase
 
-" When searching try to be smart about cases 
+" When searching try to be smart about cases
 "set smartcase
 
 " Highlight search results
@@ -283,7 +286,7 @@ map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
 " Switch CWD to the directory of the open buffer
 map <leader>cd :cd %:p:h<cr>:pwd<cr>
 
-" Specify the behavior when switching between buffers 
+" Specify the behavior when switching between buffers
 try
   set switchbuf=useopen,usetab ",newtab
   set stal=2
@@ -308,8 +311,8 @@ set laststatus=2
 " Format the status line
 "set statusline=\ %f%m%r%h\ \ CWD:\ %.40{getcwd()}\ \ \ Line:\ %l.%c
 
-"Powerline
-set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
+"Airline
+let g:airline_powerline_fonts = 1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Editing mappings
