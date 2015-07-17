@@ -7,13 +7,11 @@ chromium
 dmenu
 elinks
 firefox
-flashplugin
 git
 gst-libav
 gst-plugins-base
 gst-plugins-good
 gstreamer
-gtk-engine-unico
 gvim
 kdeartwork-wallpapers
 kdeartwork-weatherwallpapers
@@ -21,6 +19,7 @@ mate-themes
 mate-themes-extras
 mumble
 nodejs
+npm
 openssh
 pulseaudio-alsa
 pulseaudio-bluetooth
@@ -32,5 +31,7 @@ the_silver_searcher
 tlp
 ttf-oxygen
 unzip
+xorg-xfontsel
+xorg-xlsfonts
 zip
 zsh

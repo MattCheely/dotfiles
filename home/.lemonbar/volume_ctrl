@@ -15,19 +15,19 @@ else
     fi
 fi
 
-str1=${str#Simple*[}
-v1=${str1%%]*]}
-il=`expr index "$str1" [`
-o="off"
-mutel=''
-if [ ${str1:$il:3} == $o ]; then mutel='M'; fi
-s=${str1:0:1}
-str2=${str1#${str1:0:1}*[}
-str1=$str2
-str2=${str1#${str1:0:1}*[}
-ir=`expr index "$str2" [`
-muter=''
-if [ ${str2:0:3} = $o ]; then muter='[M]'; fi
-v2=${str2%\]}
-v=${v1}\ $muter
-echo "V$v" > "$PANEL_FIFO"
+getVol() {
+    local amixerStr=$1
+    local trimFront=${amixerStr#*[}
+    local nextBracketPos=`expr index "$trimFront" [`
+
+    if [ ${trimFront:$nextBracketPos:3} == "off" ]
+    then
+        echo "M"
+    else
+        echo ${trimFront%%%]*}
+    fi
+}
+
+volStr=`getVol "$str"`
+
+echo "V$volStr" > "$PANEL_FIFO"
