@@ -9,23 +9,26 @@ call vundle#rc()
 Plugin 'gmarik/vundle'
 
 " github repos
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'goldfeld/vim-seek'
-Plugin 'scrooloose/syntastic'
-Plugin 'scrooloose/nerdtree'
-Plugin 'jnurmine/Zenburn'
-Plugin 'bling/vim-airline'
+" Unite plugin depends on vimproc
+"    need to run ./make in .vim/bundle/vimproc.vim/
+" YouComplete me needs to be compile
+"   run ./install.sh in .vim/bundle/YouCompleteMe/
 Plugin 'airblade/vim-gitgutter'
 Plugin 'altercation/vim-colors-solarized'
+Plugin 'bling/vim-airline'
+Plugin 'goldfeld/vim-seek'
+Plugin 'jnurmine/Zenburn'
+Plugin 'kchmck/vim-coffee-script'
 Plugin 'mattn/emmet-vim'
-Plugin 'rking/ag.vim'
+Plugin 'mustache/vim-mustache-handlebars'
 Plugin 'NLKNguyen/papercolor-theme'
-Plugin 'tpope/vim-fugitive'
-
-" Unite plugin - depends on vimproc
-"    need to run ./make in .vim/bundle/vimproc.vim/
+Plugin 'rking/ag.vim'
+Plugin 'scrooloose/nerdtree'
+Plugin 'scrooloose/syntastic'
 Plugin 'Shougo/vimproc.vim'
 Plugin 'Shougo/unite.vim'
+Plugin 'tpope/vim-fugitive'
+Plugin 'Valloric/YouCompleteMe'
 
 "vim-scripts
 Plugin 'darkburn'
