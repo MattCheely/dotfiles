@@ -7,7 +7,16 @@
 setxkbmap -model pc104 -option ctrl:nocaps
 xsetroot -solid "#2b2b2b" -cursor_name left_ptr
 
-#TODO: Generate list of files instead of using folders & remove .desktop entries
-feh --randomize --recursive --bg-fill /usr/share/wallpapers /usr/share/archlinux/wallpaper &
-screensaver -no-splash &
+# Try real hard to set a background, since feh won't retry if the random file
+# it picks is unreadable
+for i in {1..10}
+do
+    feh --randomize --recursive --bg-fill --no-fehbg /usr/share/wallpapers /usr/share/archlinux/wallpaper
+    if  [ $? -eq 0 ]
+    then
+        break
+    fi
+done
+
+xscreensaver -no-splash &
 terminology &

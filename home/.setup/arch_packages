@@ -4,15 +4,19 @@ bluez-firmware
 bluez-utils
 bspwm
 chromium
+clojure
 dmenu
 elinks
+evince
 firefox
 git
+gnome-font-viewer
 gst-libav
 gst-plugins-base
 gst-plugins-good
 gstreamer
 gvim
+iotop
 kdeartwork-wallpapers
 kdeartwork-weatherwallpapers
 mate-themes
@@ -23,6 +27,7 @@ npm
 openssh
 pulseaudio-alsa
 pulseaudio-bluetooth
+rust
 sddm
 sxhkd
 terminology
