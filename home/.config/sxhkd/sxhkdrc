@@ -62,10 +62,10 @@ super + ctrl + {1-9}
 	bspc window --ratio 0.{1-9}
 
 super + {1-9,0}
-	bspc window --to-desktop focused:^{1-9,10}
+	bspc window --focus focused:^{1-9,10}
 
 super + shift + {1-9,0}
-	bspc desktop --focus focused:^{1-9,10}
+	bspc desktop --to-desktop focused:^{1-9,10}
 
 super + alt + {1-9,0}
     bspc desktop --to-monitor ^{1-9,0}
