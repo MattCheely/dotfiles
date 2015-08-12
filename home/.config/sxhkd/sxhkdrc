@@ -2,35 +2,51 @@
 # bspwm hotkeys
 #
 
+## Exit bspwm
 super + alt + Escape
 	pkill -x panel; bspc quit
 
+## Close current window
 super + w
 	bspc window --close
 
+## Toggle desktop layout
 super + t
 	bspc desktop --layout next
 
+## Balance window sizes
 super + b
 	bspc desktop --balance
 
-super + {s,f}
-	bspc window --toggle {floating,fullscreen}
+## Fullscreen window toggle
+super + f
+    bspc window --toggle fullscreen
 
-super + {grave,Tab}
-	bspc {window,desktop} --focus last
+## Floating window toggle
+super + s
+	bspc window --toggle floating
 
+## Switch to last window
+super + grave
+	bspc window --focus last
+
+## Switch to last desktop
+super + Tab
+	bspc desktop --focus last
+
+## Swap with the last window
 super + apostrophe
 	bspc window --swap last
 
-super + {o,i}
-	bspc control --record-history off; \
-	bspc window {older,newer} -f; \
-	bspc control --record-history on
+#super + {o,i}
+#	bspc control --record-history off; \
+#	bspc window {older,newer} -f; \
+#	bspc control --record-history on
 
-super + y
-	bspc window --to-window last.manual
+#super + y
+#	bspc window --to-window last.manual
 
+## Send window to biggest position on screen
 super + m
 	bspc window --swap biggest
 
@@ -62,10 +78,10 @@ super + ctrl + {1-9}
 	bspc window --ratio 0.{1-9}
 
 super + {1-9,0}
-	bspc window --focus focused:^{1-9,10}
+	bspc desktop --focus focused:^{1-9,10}
 
 super + shift + {1-9,0}
-	bspc desktop --to-desktop focused:^{1-9,10}
+	bspc window --to-desktop focused:^{1-9,10}
 
 super + alt + {1-9,0}
     bspc desktop --to-monitor ^{1-9,0}
@@ -88,6 +104,9 @@ super + Return
 
 super + space
 	dmenu_run
+
+super + v
+    xscreensaver-command --lock
 
 #
 # Media keys
