@@ -42,6 +42,9 @@ Plugin 'Rename2'
 filetype plugin on
 filetype indent on
 
+" Set up custom filetypes
+au BufNewFile,BufRead *.tag set filetype=html
+
 " Show line numbers
 set number
 
@@ -327,7 +330,7 @@ map 0 ^
 " Let Ctrl+V paste in insert mode
 imap <C-v> <esc>"+gpi<right>
 
-" Move a line of text using ALT+[jk] or Comamnd+[jk] on mac
+" Move a line of text using Ctrl+[jk]
 nmap <C-j> mz:m+<cr>`z
 nmap <C-k> mz:m-2<cr>`z
 vmap <C-j> :m'>+<cr>`<my`>mzgv`yo`z
