@@ -2,41 +2,101 @@
 # bspwm hotkeys
 #
 
+### WM Global Actions ###
+
 ## Exit bspwm
 super + alt + Escape
 	pkill -x panel; bspc quit
 
-## Close current window
-super + w
-	bspc window --close
+# make sxhkd reload its configuration files:
+super + Escape
+	pkill -USR1 -x sxhkd
 
-## Toggle desktop layout
-super + t
-	bspc desktop --layout next
 
-## Balance window sizes
-super + b
-	bspc desktop --balance
+### Multi-Desktop Management ###
 
-## Fullscreen window toggle
-super + f
-    bspc window --toggle fullscreen
-
-## Floating window toggle
-super + s
-	bspc window --toggle floating
-
-## Switch to last window
-super + grave
-	bspc window --focus last
-
-## Switch to last desktop
+# Switch to last desktop
 super + Tab
 	bspc desktop --focus last
 
-## Swap with the last window
+# Switch to specific desktop
+super + {1-9,0}
+    desktop={1-9,10};\
+    bspc monitor --add-desktops $(seq $(expr 1 + $(bspc query -D | wc -l)) $desktop);\
+    bspc desktop --focus focused:^$desktop
+
+# Switch to next/prev desktop
+super + bracket{left,right}
+	bspc desktop --focus {prev,next}
+
+
+### Current Desktop Management ###
+
+# Toggle desktop layout
+super + t
+	bspc desktop --layout next
+
+# Balance window sizes
+super + b
+	bspc desktop --balance
+
+# Move window focus or move window
+super + {_,shift + }{h,j,k,l}
+	bspc window --{focus,swap} {left,down,up,right}
+
+# Focus next/prev window
+super + {_,shift + }c
+	bspc window --focus {next,prev}
+
+# Rotate windows
+super + {comma,period}
+	bspc desktop --circulate {backward,forward}
+
+# Switch to last window
+super + grave
+	bspc window --focus last
+
+
+### Current Window Controls ###
+
+# Close current window
+super + w
+	bspc window --close
+
+# Fullscreen window toggle
+super + f
+    bspc window --toggle fullscreen
+
+# Move to specific desktop
+super + shift + {1-9,0}
+	bspc window --to-desktop focused:^{1-9,10}
+
+# Move to specific monitor
+super + alt + {1-9,0}
+    bspc desktop --to-desktop ^{1-9,0}
+
+# Floating window toggle
+super + s
+	bspc window --toggle floating
+
+# Swap with the last window
 super + apostrophe
 	bspc window --swap last
+
+# Send window to biggest position on screen
+super + m
+	bspc window --swap biggest
+
+# Window directional embiggen
+super + alt + {h,j,k,l}
+	bspc window --edge {left -10,down +10,up -10,right +10}
+
+# Window directional enlittlen
+super + alt + shift + {h,j,k,l}
+	bspc window --edge {right -10,up +10,down -10,left +10}
+
+
+### Uncategorized / TODO ###
 
 #super + {o,i}
 #	bspc control --record-history off; \
@@ -46,58 +106,30 @@ super + apostrophe
 #super + y
 #	bspc window --to-window last.manual
 
-## Send window to biggest position on screen
-super + m
-	bspc window --swap biggest
-
-super + {_,shift + }{h,j,k,l}
-	bspc window --{focus,swap} {left,down,up,right}
-
-super + {_,shift + }c
-	bspc window --focus {next,prev}
-
-super + {comma,period}
-	bspc desktop --circulate {backward,forward}
-
-super + bracket{left,right}
-	bspc desktop --focus {prev,next}
-
 super + ctrl + {h,j,k,l}
 	bspc window --presel {left,down,up,right}
 
 super + ctrl + {_,shift + }space
 	bspc {window --presel cancel,desktop --cancel-presel}
 
-super + alt + {h,j,k,l}
-	bspc window --edge {left -10,down +10,up -10,right +10}
-
-super + alt + shift + {h,j,k,l}
-	bspc window --edge {right -10,up +10,down -10,left +10}
-
 super + ctrl + {1-9}
 	bspc window --ratio 0.{1-9}
 
-super + {1-9,0}
-	bspc desktop --focus focused:^{1-9,10}
-
-super + shift + {1-9,0}
-	bspc window --to-desktop focused:^{1-9,10}
-
-super + alt + {1-9,0}
-    bspc desktop --to-monitor ^{1-9,0}
-
 ~button1
-	bspc pointer -g focus
+	bspc pointer --grab focus
 
 super + button{1-3}
-	bspc pointer -g {move,resize_side,resize_corner}
+	bspc pointer --grab {move,resize_side,resize_corner}
+
+super + !button{1-3}
+    bspc pointer --track %i %i
 
 super + @button{1-3}
-	bspc pointer -u
+	bspc pointer --ungrab
 
-#
-# wm independent hotkeys
-#
+
+
+### wm independent hotkeys ###
 
 super + Return
 	terminology
@@ -108,9 +140,9 @@ super + space
 super + v
     xscreensaver-command --lock
 
-#
-# Media keys
-#
+
+### Media keys ###
+
 XF86AudioLowerVolume
     ~/.lemonbar/volume_ctrl 10%-
 
@@ -131,7 +163,3 @@ shift + XF86MonBrightnessUp
 
 shift + XF86MonBrightnessDown
     xbacklight -dec 1
-
-# make sxhkd reload its configuration files:
-super + Escape
-	pkill -USR1 -x sxhkd
