@@ -22,7 +22,7 @@ super + Tab
 # Switch to specific desktop
 super + {1-9,0}
     desktop={1-9,10};\
-    bspc monitor --add-desktops $(seq $(expr 1 + $(bspc query -D | wc -l)) $desktop);\
+    bspc monitor --add-desktops $(seq $(expr 1 + $(bspc query -D -m focused | wc -l)) $desktop);\
     bspc desktop --focus focused:^$desktop
 
 # Switch to next/prev desktop
@@ -73,7 +73,7 @@ super + shift + {1-9,0}
 
 # Move to specific monitor
 super + alt + {1-9,0}
-    bspc desktop --to-desktop ^{1-9,0}
+    bspc window --to-monitor ^{1-9,0}
 
 # Floating window toggle
 super + s
