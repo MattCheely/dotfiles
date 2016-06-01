@@ -121,7 +121,6 @@ super + ctrl + {1-9}
 super + button{1-3}
 	bspc pointer --grab {move,resize_side,resize_corner}
 
-
 ### wm independent hotkeys ###
 
 super + Return
