@@ -28,6 +28,7 @@ mumble
 nodejs
 npm
 openssh
+p7zip
 pulseaudio-alsa
 pulseaudio-bluetooth
 rust

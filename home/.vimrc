@@ -30,6 +30,7 @@ Plugin 'Shougo/vimproc.vim'
 Plugin 'Shougo/unite.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'Valloric/YouCompleteMe'
+Plugin 'lambdatoast/elm.vim'
 
 "vim-scripts
 Plugin 'darkburn'

@@ -26,7 +26,7 @@ cat "$PANEL_FIFO" | $DIR/panel_bar | lemonbar -g x$PANEL_HEIGHT -f "$PANEL_FONT_
 
 #Write stuff to the panel FIFO
 
-bspc control --subscribe > "$PANEL_FIFO" &
+bspc subscribe report > "$PANEL_FIFO" &
 # xtitle -sf 'T%s' > "$PANEL_FIFO" &
 echo "$($DIR/volume_ctrl)" > $PANEL_FIFO &
 

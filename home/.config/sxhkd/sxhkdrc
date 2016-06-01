@@ -42,11 +42,11 @@ super + b
 
 # Move window focus or move window
 super + {_,shift + }{h,j,k,l}
-	bspc window --{focus,swap} {left,down,up,right}
+	bspc node --{focus,swap} {left,down,up,right}
 
 # Focus next/prev window
 super + {_,shift + }c
-	bspc window --focus {next,prev}
+	bspc node --focus {next,prev}
 
 # Rotate windows
 super + {comma,period}
@@ -54,79 +54,72 @@ super + {comma,period}
 
 # Switch to last window
 super + grave
-	bspc window --focus last
+	bspc node --focus last
 
 
 ### Current Window Controls ###
 
 # Close current window
 super + w
-	bspc window --close
+	bspc node --close
 
 # Fullscreen window toggle
 super + f
-    bspc window --toggle fullscreen
+    bspc node --toggle fullscreen
 
 # Move to specific desktop
 super + shift + {1-9,0}
-	bspc window --to-desktop focused:^{1-9,10}
+	bspc node --to-desktop focused:^{1-9,10}
 
 # Move to specific monitor
 super + alt + {1-9,0}
-    bspc window --to-monitor ^{1-9,0}
+    bspc node --to-monitor ^{1-9,0}
 
 # Floating window toggle
 super + s
-	bspc window --toggle floating
+	bspc node --toggle floating
 
 # Swap with the last window
 super + apostrophe
-	bspc window --swap last
+	bspc node --swap last
 
 # Send window to biggest position on screen
 super + m
-	bspc window --swap biggest
+	bspc node --swap biggest
 
 # Window directional embiggen
 super + alt + {h,j,k,l}
-	bspc window --edge {left -10,down +10,up -10,right +10}
+	bspc node --edge {left -10,down +10,up -10,right +10}
 
 # Window directional enlittlen
 super + alt + shift + {h,j,k,l}
-	bspc window --edge {right -10,up +10,down -10,left +10}
+	bspc node --edge {right -10,up +10,down -10,left +10}
 
 
 ### Uncategorized / TODO ###
 
 #super + {o,i}
 #	bspc control --record-history off; \
-#	bspc window {older,newer} -f; \
+#	bspc node {older,newer} -f; \
 #	bspc control --record-history on
 
 #super + y
-#	bspc window --to-window last.manual
+#	bspc node --to-window last.manual
 
 super + ctrl + {h,j,k,l}
-	bspc window --presel {left,down,up,right}
+	bspc node --presel {left,down,up,right}
 
 super + ctrl + {_,shift + }space
 	bspc {window --presel cancel,desktop --cancel-presel}
 
 super + ctrl + {1-9}
-	bspc window --ratio 0.{1-9}
+	bspc node --ratio 0.{1-9}
 
 ~button1
 	bspc pointer --grab focus
 
 super + button{1-3}
 	bspc pointer --grab {move,resize_side,resize_corner}
-
-super + !button{1-3}
-    bspc pointer --track %i %i
-
-super + @button{1-3}
-	bspc pointer --ungrab
-
 
 
 ### wm independent hotkeys ###
