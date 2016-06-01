@@ -42,7 +42,7 @@ super + b
 
 # Move window focus or move window
 super + {_,shift + }{h,j,k,l}
-	bspc node --{focus,swap} {left,down,up,right}
+	bspc node --{focus,swap} {west,north,south,east}
 
 # Focus next/prev window
 super + {_,shift + }c
@@ -89,11 +89,11 @@ super + m
 
 # Window directional embiggen
 super + alt + {h,j,k,l}
-	bspc node --edge {left -10,down +10,up -10,right +10}
+	bspc node --resize {left -10,bottom +10,top -10,right +10}
 
 # Window directional enlittlen
 super + alt + shift + {h,j,k,l}
-	bspc node --edge {right -10,up +10,down -10,left +10}
+	bspc node --edge {right -10,top +10,bottom -10,left +10}
 
 
 ### Uncategorized / TODO ###
@@ -107,7 +107,7 @@ super + alt + shift + {h,j,k,l}
 #	bspc node --to-window last.manual
 
 super + ctrl + {h,j,k,l}
-	bspc node --presel {left,down,up,right}
+	bspc node --presel {west,south,north,east}
 
 super + ctrl + {_,shift + }space
 	bspc {window --presel cancel,desktop --cancel-presel}
