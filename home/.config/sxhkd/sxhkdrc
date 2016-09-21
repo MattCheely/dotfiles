@@ -89,7 +89,7 @@ super + m
 
 # Window directional embiggen
 super + alt + {h,j,k,l}
-	bspc node --resize {left -10,bottom +10,top -10,right +10}
+	bspc node --ratio -10,+10,-10,+10}
 
 # Window directional enlittlen
 super + alt + shift + {h,j,k,l}
@@ -124,7 +124,7 @@ super + button{1-3}
 ### wm independent hotkeys ###
 
 super + Return
-	terminology
+	HyperTerm
 
 super + space
 	dmenu_run

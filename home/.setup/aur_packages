@@ -5,10 +5,13 @@ ceti-2-themes
 compton
 firefox-aurora
 google-talkplugin
+hyperterm
 jdk
 leiningen
 lemonbar-git
 nyaovim
+python2-neovim
+python-neovim
 ttf-ms-fonts
 twemoji-color-font
 vertex-themes

@@ -19,4 +19,4 @@ do
 done
 
 xscreensaver -no-splash &
-terminology &
+HyperTerm &
