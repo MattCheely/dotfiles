@@ -9,7 +9,6 @@ bspc config borderless_monocle      true
 bspc config gapless_monocle         true
 bspc config focus_by_distance       true
 bspc config focus_follows_pointer   true
-bspc config single_monocle          true
 
 # Start with two desktops on each monitor
 bspc monitor -d 1 2

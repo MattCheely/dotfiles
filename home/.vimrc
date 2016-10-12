@@ -29,7 +29,7 @@ Plugin 'Shougo/vimproc.vim'
 Plugin 'Shougo/unite.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'Valloric/YouCompleteMe'
-Plugin 'lambdatoast/elm.vim'
+Plugin 'ElmCast/elm-vim'
 Plugin 'editorconfig/editorconfig-vim'
 
 "vim-scripts
@@ -67,6 +67,27 @@ nmap <leader>q :q<cr>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "Unmap <leader>d from YouCompleteMe so we can use it for other things
 let g:ycm_key_detailed_diagnostics = ''
+"Unmap <leader>d from YouCompleteMe so we can use it for other things
+let g:ycm_key_detailed_diagnostics = ''
+let g:ycm_semantic_triggers = {
+    \ 'elm' : ['.'],
+    \}
+
+" == Elm ==
+
+let g:elm_format_autosave = 1
+let g:elm_setup_keybindings = 0
+
+nnoremap <leader>r <Plug>(elm-make)
+nnoremap <leader>b <Plug>(elm-make-main)
+nnoremap <leader>t <Plug>(elm-test)
+nnoremap <leader>r <Plug>(elm-repl)
+nnoremap <leader>ed <Plug>(elm-error-detail)
+nnoremap <leader>d <Plug>(elm-show-docs)
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:elm_syntastic_show_warnings = 1
 
 " Run syntax checks on file open
 let g:syntastic_check_on_open=1
