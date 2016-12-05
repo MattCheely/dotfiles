@@ -29,6 +29,7 @@ mumble
 neovim
 nodejs
 npm
+oath-toolkit
 openssh
 p7zip
 pulseaudio-alsa
@@ -40,6 +41,7 @@ terminology
 terminus-font
 the_silver_searcher
 tlp
+traceroute
 ttf-oxygen
 unzip
 wmname
