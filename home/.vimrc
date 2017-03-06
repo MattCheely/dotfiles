@@ -97,7 +97,7 @@ let g:syntastic_warning_symbol='⚠'
 " Turn off error highlighting, symbols are plenty
 let g:syntastic_enable_highlighting = 0
 " Set languange checkers
-let g:syntastic_javascript_checkers = ['jshint', 'jscs']
+let g:syntastic_javascript_checkers = ['eslint']
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
