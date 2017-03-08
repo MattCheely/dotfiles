@@ -1,12 +1,12 @@
 " ========= Vundle Bundle Management ============
 set nocompatible
 filetype off
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
 " let Vundle manage Vundle
 " required!
-Plugin 'gmarik/vundle'
+Plugin 'VundleVim/Vundle.vim'
 
 " github repos
 " Unite plugin depends on vimproc
@@ -18,17 +18,15 @@ Plugin 'altercation/vim-colors-solarized'
 Plugin 'bling/vim-airline'
 Plugin 'goldfeld/vim-seek'
 Plugin 'jnurmine/Zenburn'
-Plugin 'mattn/emmet-vim'
-Plugin 'mustache/vim-mustache-handlebars'
 Plugin 'NLKNguyen/papercolor-theme'
 Plugin 'rking/ag.vim'
 Plugin 'rust-lang/rust.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
-Plugin 'Shougo/vimproc.vim'
-Plugin 'Shougo/unite.vim'
+Plugin 'nixprime/cpsm'
+Plugin 'Shougo/denite.nvim'
+Plugin 'Shougo/deoplete.nvim'
 Plugin 'tpope/vim-fugitive'
-Plugin 'Valloric/YouCompleteMe'
 Plugin 'ElmCast/elm-vim'
 Plugin 'editorconfig/editorconfig-vim'
 
@@ -36,12 +34,14 @@ Plugin 'editorconfig/editorconfig-vim'
 Plugin 'darkburn'
 Plugin 'Rename2'
 
-
-" ========= Config ==============================
+call vundle#end()
 
 " Enable filetype plugins
 filetype plugin on
 filetype indent on
+
+
+" ========= Config ==============================
 
 " Set up custom filetypes
 au BufNewFile,BufRead *.tag set filetype=html
@@ -114,43 +114,41 @@ let NERDTreeChDirMode = 2
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Unite & Ag (search)
+" => Denite & Ag (search)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" unite sources
-let g:unite_source_history_yank_enable = 1
-call unite#filters#matcher_default#use(['matcher_fuzzy'])
+" Use fuzzy matcher for file lookup
+call denite#custom#source('file_rec', 'matchers', [ 'matcher_cpsm' ])
 
 if executable('ag')
-    let g:unite_source_rec_async_command = 'ag --nocolor --nogroup -g ""'
-    let g:unite_source_grep_command = 'ag'
-    let g:unite_source_grep_default_opts = '-i --line-numbers --nocolor --nogroup --hidden'
-    let g:unite_source_grep_recursive_opt = ''
+    call denite#custom#var('file_rec', 'command', [ 'ag', '--nocolor', '--nogroup', '-g', ''])
+    call denite#custom#var('grep', 'command', [ 'ag' ])
+    call denite#custom#var('grep', 'default_opts', [ '--vimgrep' ])
+    call denite#custom#var('grep', 'recursive_opts', [])
+    call denite#custom#var('grep', 'pattern_opt', [])
+    call denite#custom#var('grep', 'separator', ['--'])
+    call denite#custom#var('grep', 'final_opts', [])
 endif
 
-" search for a file in the filetree
-nnoremap <leader>f :<C-u>Unite -no-split -start-insert -auto-preview file_rec/async<cr>
-nnoremap <leader>g :<C-u>Unite -no-quit -auto-preview grep:<c-r>=getcwd()<cr>:--case-sensitive:
-nnoremap <leader>d :<C-u>Unite -no-split -start-insert directory_rec/async -default-action=cd<cr>
-nnoremap <leader>b :<C-u>Unite -no-split -start-insert bookmark<cr>
-nnoremap <leader>y :<C-u>Unite -no-split -start-insert history/yank<cr>
+" search for a file in the CWD
+nnoremap <leader>f :<C-u>Denite -auto-resize -auto-preview file_rec<cr>
+" grep in the CWD
+nnoremap <leader>g :<C-u>Denite -auto-resize -auto-preview -mode=normal grep:<c-r>=getcwd()<cr>::
 
 "Custom mappings in the unite buffer
-function! s:unite_settings()
-    " Navigate with control-j/k
-    imap <buffer> <C-j> <Plug>(unite_select_next_line)
-    imap <buffer> <C-k> <Plug>(unite_select_previous_line)
-    " exit unite
-    imap <buffer> <C-q> <Plug>(unite_exit)
-    nmap <buffer> <C-q> <Plug>(unite_exit)
-    " reset unite cache
-    imap <buffer> <C-r> <Plug>(unite_redraw)
-endfunction
-autocmd FileType unite call s:unite_settings()
+" function! s:unite_settings()
+"     " Navigate with control-j/k
+"     imap <buffer> <C-j> <Plug>(unite_select_next_line)
+"     imap <buffer> <C-k> <Plug>(unite_select_previous_line)
+"     " exit unite
+"     imap <buffer> <C-q> <Plug>(unite_exit)
+"     nmap <buffer> <C-q> <Plug>(unite_exit)
+"     " reset unite cache
+"     imap <buffer> <C-r> <Plug>(unite_redraw)
+" endfunction
+" autocmd FileType unite call s:unite_settings()
 
 " --- type * to search for a word in all files
-nmap* :<C-u>Unite -no-quit -auto-preview grep:<c-r>=getcwd()<cr>:--case-sensitive:<c-r>=expand("<cword>")<cr><cr>
-" nmap * :Ag <c-r>=expand("<cword>")<cr><cr>
-nnoremap <leader>/ :Ag
+nmap* :<C-u>Denite -auto-resize -auto-preview -mode=normal grep:<c-r>=getcwd()<cr>::<c-r>=expand("<cword>")<cr><cr>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
