@@ -9,10 +9,6 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 " github repos
-" Unite plugin depends on vimproc
-"    need to run ./make in .vim/bundle/vimproc.vim/
-" YouComplete me needs to be compile
-"   run ./install.sh in .vim/bundle/YouCompleteMe/
 Plugin 'airblade/vim-gitgutter'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'bling/vim-airline'
@@ -29,6 +25,10 @@ Plugin 'Shougo/deoplete.nvim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'ElmCast/elm-vim'
 Plugin 'editorconfig/editorconfig-vim'
+
+" NeoVim specific
+Plugin 'rhysd/nyaovim-mini-browser'
+" Plugin 'neomake/neomake'
 
 "vim-scripts
 Plugin 'darkburn'
@@ -65,18 +65,13 @@ nmap <leader>q :q<cr>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugin config
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"Unmap <leader>d from YouCompleteMe so we can use it for other things
-let g:ycm_key_detailed_diagnostics = ''
-"Unmap <leader>d from YouCompleteMe so we can use it for other things
-let g:ycm_key_detailed_diagnostics = ''
-let g:ycm_semantic_triggers = {
-    \ 'elm' : ['.'],
-    \}
+" Use deoplete
+let g:deoplete#enable_at_startup = 1
 
 " == Elm ==
 
 let g:elm_format_autosave = 1
-let g:elm_setup_keybindings = 0
+let g:elm_setup_keybindings = 0;
 
 nnoremap <leader>r <Plug>(elm-make)
 nnoremap <leader>b <Plug>(elm-make-main)
@@ -88,17 +83,6 @@ nnoremap <leader>d <Plug>(elm-show-docs)
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:elm_syntastic_show_warnings = 1
-
-" Run syntax checks on file open
-let g:syntastic_check_on_open=1
-" Set syntax check symbols
-let g:syntastic_error_symbol='✗'
-let g:syntastic_warning_symbol='⚠'
-" Turn off error highlighting, symbols are plenty
-let g:syntastic_enable_highlighting = 0
-" Set languange checkers
-let g:syntastic_javascript_checkers = ['eslint']
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => NERDTree
@@ -154,9 +138,9 @@ nmap* :<C-u>Denite -auto-resize -auto-preview -mode=normal grep:<c-r>=getcwd()<c
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM user interface
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Highlight column 80
+" Highlight column 100
 if (exists('+colorcolumn'))
-    set colorcolumn=80
+    set colorcolumn=100
 endif
 
 " Set 7 lines to the cursor - when moving vertically using j/k
@@ -220,7 +204,10 @@ try
     colorscheme darkburn
 catch
 endtry
-"set background=dark
+
+command Present colorscheme PaperColor | set background=light
+command UnPresent colorscheme darkburn
+
 highlight ColorColumn guibg=#121212
 
 " Set extra options when running in GUI mode
