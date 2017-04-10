@@ -65,7 +65,7 @@ super + w
 
 # Fullscreen window toggle
 super + f
-    bspc node --toggle fullscreen
+    bspc node --state ~fullscreen
 
 # Move to specific desktop
 super + shift + {1-9,0}
@@ -77,7 +77,7 @@ super + alt + {1-9,0}
 
 # Floating window toggle
 super + s
-	bspc node --toggle floating
+	bspc node --state ~floating
 
 # Swap with the last window
 super + apostrophe

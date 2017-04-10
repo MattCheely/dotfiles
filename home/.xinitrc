@@ -17,8 +17,8 @@ xsetroot -solid "#2b2b2b" -cursor_name left_ptr
 feh --randomize --recursive --bg-fill ~/.backgrounds/ &
 xscreensaver -no-splash&
 
-sxhkd &
-exec bspwm
+#sxhkd &
+#exec bspwm
 
 # exec gnome-session
 # exec startkde
