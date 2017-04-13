@@ -12,6 +12,7 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'bling/vim-airline'
+Plugin 'bling/vim-airline-themes'
 Plugin 'goldfeld/vim-seek'
 Plugin 'jnurmine/Zenburn'
 Plugin 'NLKNguyen/papercolor-theme'
@@ -70,8 +71,10 @@ let g:deoplete#enable_at_startup = 1
 
 " == Elm ==
 
+let g:syntastic_elm_checkers = ['elm_make']
+
 let g:elm_format_autosave = 1
-let g:elm_setup_keybindings = 0;
+let g:elm_setup_keybindings = 0
 
 nnoremap <leader>r <Plug>(elm-make)
 nnoremap <leader>b <Plug>(elm-make-main)
@@ -80,7 +83,13 @@ nnoremap <leader>r <Plug>(elm-repl)
 nnoremap <leader>ed <Plug>(elm-error-detail)
 nnoremap <leader>d <Plug>(elm-show-docs)
 
+
+" Set syntax check symbols
+let g:syntastic_error_symbol='😒'
+let g:syntastic_warning_symbol='😒'
+
 let g:syntastic_always_populate_loc_list = 1
+
 let g:syntastic_auto_loc_list = 1
 let g:elm_syntastic_show_warnings = 1
 
@@ -167,10 +176,10 @@ set backspace=eol,start,indent
 set whichwrap+=<,>,h,l
 
 " Ignore case when searching
-set ignorecase
+"set ignorecase
 
 " When searching try to be smart about cases
-"set smartcase
+set smartcase
 
 " Highlight search results
 set hlsearch
@@ -205,21 +214,10 @@ try
 catch
 endtry
 
-command Present colorscheme PaperColor | set background=light
-command UnPresent colorscheme darkburn
+command Present colorscheme PaperColor | set background=light | AirlineTheme papercolor
+command UnPresent colorscheme darkburn | AirlineTheme dark
 
 highlight ColorColumn guibg=#121212
-
-" Set extra options when running in GUI mode
-if has("gui_running")
-    set guifont=Inconsolata\ for\ Powerline\ Medium\ 13
-    "set guifont=Fantasque\ Sans\ Mono\ 14
-    set guioptions-=T
-    set guioptions-=m
-    set guioptions+=e
-    set t_Co=256
-    set guitablabel=%M\ %t
-endif
 
 " Set utf8 as standard encoding and en_US as the standard language
 set encoding=utf8
