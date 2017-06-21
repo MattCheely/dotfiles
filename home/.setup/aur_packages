@@ -3,13 +3,15 @@ broadcom-wl
 cargo-bin
 ceti-2-themes
 compton
-firefox-aurora
+firefox-dev
 google-talkplugin
 hyper
+inconsolata
 jdk
 kakoune
 leiningen
 lemonbar-git
+neovim-qt
 nyaovim
 python2-neovim
 python-neovim

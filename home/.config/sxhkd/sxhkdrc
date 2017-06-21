@@ -38,7 +38,7 @@ super + t
 
 # Balance window sizes
 super + b
-	bspc desktop --balance
+	bspc node @focused:/ --balance
 
 # Move window focus or move window
 super + {_,shift + }{h,j,k,l}
@@ -50,7 +50,7 @@ super + {_,shift + }c
 
 # Rotate windows
 super + {comma,period}
-	bspc desktop --circulate {backward,forward}
+	bspc node @focused:/ --circulate {backward,forward}
 
 # Switch to last window
 super + grave
@@ -77,7 +77,7 @@ super + alt + {1-9,0}
 
 # Floating window toggle
 super + s
-	bspc node --state ~floating
+	bspc node @focused:/ --state ~floating
 
 # Swap with the last window
 super + apostrophe
@@ -89,11 +89,16 @@ super + m
 
 # Window directional embiggen
 super + alt + {h,j,k,l}
-	bspc node --ratio -10,+10,-10,+10}
+	bspc node --resize {left -10 0,bottom 0 +10,top 0 -10,right +10 0}
 
 # Window directional enlittlen
 super + alt + shift + {h,j,k,l}
-	bspc node --edge {right -10,top +10,bottom -10,left +10}
+	bspc node --resize {right -10 0,top 0 +10,bottom 0 -10,left +10 0}
+
+# Rotate window
+super + >
+    bspc node -f @parent;\
+    bspc node --rotate 90
 
 
 ### Uncategorized / TODO ###
@@ -114,7 +119,6 @@ super + ctrl + {_,shift + }space
 
 super + ctrl + {1-9}
 	bspc node --ratio 0.{1-9}
-
 ~button1
 	bspc pointer --grab focus
 
