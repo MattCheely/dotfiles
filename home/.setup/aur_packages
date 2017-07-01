@@ -13,8 +13,10 @@ leiningen
 lemonbar-git
 neovim-qt
 nyaovim
+otf-fira-code
 python2-neovim
 python-neovim
+ttf-fira-code
 ttf-ms-fonts
 twemoji-color-font
 vertex-themes
