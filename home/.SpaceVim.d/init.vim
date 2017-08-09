@@ -9,6 +9,8 @@ let g:spacevim_custom_plugins = [
 
 let g:elm_format_autosave = 1
 
+let g:syntastic_javascript_checkers = ['eslint']
+
 " set leader
 let mapleader=","
 
