@@ -33,7 +33,7 @@ super + bracket{left,right}
 ### Current Desktop Management ###
 
 # Toggle desktop layout
-super + t
+super + l
 	bspc desktop --layout next
 
 # Balance window sizes
@@ -63,10 +63,6 @@ super + grave
 super + w
 	bspc node --close
 
-# Fullscreen window toggle
-super + f
-    bspc node --state ~fullscreen
-
 # Move to specific desktop
 super + shift + {1-9,0}
 	bspc node --to-desktop focused:^{1-9,10}
@@ -76,8 +72,8 @@ super + alt + {1-9,0}
     bspc node --to-monitor ^{1-9,0}
 
 # Floating window toggle
-super + s
-	bspc node @focused:/ --state ~floating
+super + {t,shift + t,s,f}
+	bspc node --state {tiled,psuedo_tiled,floating,fullscreen}
 
 # Swap with the last window
 super + apostrophe
@@ -85,7 +81,7 @@ super + apostrophe
 
 # Send window to biggest position on screen
 super + m
-	bspc node --swap biggest
+	bspc node --swap biggest.active
 
 # Window directional embiggen
 super + alt + {h,j,k,l}
@@ -96,10 +92,8 @@ super + alt + shift + {h,j,k,l}
 	bspc node --resize {right -10 0,top 0 +10,bottom 0 -10,left +10 0}
 
 # Rotate window
-super + >
-    bspc node -f @parent;\
-    bspc node --rotate 90
-
+super + r
+    bspc node -f @parent && bspc node --rotate 90
 
 ### Uncategorized / TODO ###
 
@@ -119,6 +113,7 @@ super + ctrl + {_,shift + }space
 
 super + ctrl + {1-9}
 	bspc node --ratio 0.{1-9}
+
 ~button1
 	bspc pointer --grab focus
 
@@ -128,7 +123,7 @@ super + button{1-3}
 ### wm independent hotkeys ###
 
 super + Return
-	hyper
+	~/bin/hyper
 
 super + space
 	dmenu_run
