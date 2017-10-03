@@ -1,14 +1,8 @@
-arc-gtk-theme-git
-cargo-bin
 ceti-2-themes
 compton
-fira
-firefox-dev
-google-talkplugin
+firefox-developer
 hyper
-inconsolata
 jdk
-kakoune
 leiningen
 lemonbar-git
 neovim-qt
@@ -18,7 +12,5 @@ python2-neovim
 python-neovim
 ttf-fira-code
 ttf-ms-fonts
-twemoji-color-font
 vertex-themes
 xtitle-git
-zukitwo-themes

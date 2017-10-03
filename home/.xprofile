@@ -10,4 +10,4 @@ xsetroot -solid "#2b2b2b" -cursor_name left_ptr
 feh --randomize --recursive --bg-fill --no-fehbg ~/.backgrounds
 
 xscreensaver -no-splash &
-~/bin/hyper &
+hyper &

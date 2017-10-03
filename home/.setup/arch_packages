@@ -1,4 +1,5 @@
 acpi
+alsa-utils
 arandr
 bluez
 bluez-firmware
@@ -10,6 +11,7 @@ dmenu
 elinks
 erlang
 evince
+feh
 firefox
 gimp
 git
@@ -19,13 +21,9 @@ gst-plugins-base
 gst-plugins-good
 gstreamer
 gvim
-i3
 iotop
-kdeartwork-wallpapers
-kdeartwork-weatherwallpapers
 lsof
 mate-themes
-mate-themes-extras
 mumble
 neovim
 nodejs
@@ -33,6 +31,7 @@ npm
 oath-toolkit
 openssh
 p7zip
+pavucontrol
 pulseaudio-alsa
 pulseaudio-bluetooth
 rust
@@ -43,9 +42,9 @@ terminus-font
 the_silver_searcher
 tlp
 traceroute
-ttf-oxygen
 unzip
 wmname
+xorg-xbacklight
 xorg-xfontsel
 xorg-xlsfonts
 zip
